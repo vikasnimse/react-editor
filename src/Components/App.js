@@ -1,29 +1,44 @@
 import React, { Component, Fragment } from "react";
-import { withStyles } from "@material-ui/core/styles";
-import Header from "./Header"
-import Footer from "./Footer"
+import { Router, Route, Switch, Link } from 'react-router-dom';
+import { PrivateRoute } from './PrivateRoute';
+import { history } from '../_helpers';
+import Login from './Pages/Login';
+import Home from './Pages/Home';
 import "../css/app.css"
 
-const styles = theme =>({
-  Content: {
-    paddingTop: 5,
-    minHeight: "calc(100vh - 150px)",
-    flex: 1
+export default class extends Component {
+  state = {
+    loggedIn: false,
+  };
+  handleLogin (){
+    console.log("clicked");
+    return;
+    this.setState({loggedIn: true});
   }
-});
-
-export default withStyles(styles)(class extends Component {
   render() {
-    const {classes} = this.props;
+    const { loggedIn } = this.state;
     return (
       <Fragment>
-          <Header />
-          <div id="content" className = {classes.Content}>
-              My Content
+        <Router history={history} >
+          <div>
+            <Switch>
+              <PrivateRoute path="/home" 
+                loggedIn={loggedIn} 
+                component={Home}
+              />
+              <PrivateRoute exact path="/" 
+                component={Home}
+                loggedIn={loggedIn} 
+              />
+              <Route exact path="/login" 
+                component={Login}
+                loggedIn={loggedIn} 
+              />
+            </Switch>
           </div>
-          <Footer />
+        </Router>
       </Fragment>
     );
   }
-});
+};
 

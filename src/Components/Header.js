@@ -1,18 +1,18 @@
 import React, { Component, Fragment } from "react";
 import {AppBar, IconButton, Typography, Toolbar} from "@material-ui/core";
-import MenuIcon from '@material-ui/icons/Menu';
+import ExplicitIcon from '@material-ui/icons/Explicit';
 
 class Header extends Component {
     render() {
         return (
             <Fragment>
-                <AppBar position="static">
-                    <Toolbar>
+                <AppBar position="static" className="height-35">
+                    <Toolbar className="height-35">
                         <IconButton edge="start"  color="inherit" aria-label="menu">
-                            <MenuIcon />
+                            <ExplicitIcon />
                         </IconButton>
                         <Typography variant="h6">
-                            My React Editor/Viewer
+                            My React Editor Viewer
                         </Typography>
                     </Toolbar>
                 </AppBar>
